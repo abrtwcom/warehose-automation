@@ -6,7 +6,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useProducts } from "../hooks/useProducts";
 import { useRealtimeData } from "../hooks/useRealtimeData";
 import ProductList from "../components/receiver/ProductList";
-import { Radio } from "lucide-react";
+import { Radio, Package, ArrowRight, CheckCircle, XCircle, Bluetooth, Shield } from "lucide-react";
 
 export default function ReceiverPortal() {
   const { user, loading: authLoading } = useAuth();
@@ -209,82 +209,173 @@ export default function ReceiverPortal() {
 
   const presentCount = myProducts.filter((p) => p.status === "present").length;
   const missingCount = myProducts.filter((p) => p.status === "missing").length;
+  const receivedCount = myProducts.filter((p) => p.status === "received").length;
 
   if (authLoading) {
     return (
-      <div className="p-8 flex items-center justify-center min-h-screen">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--color-bg)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 mx-auto" style={{ borderColor: 'var(--primary-start)' }}></div>
+          <p className="mt-4 text-white text-lg">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full opacity-10 blur-3xl"
+             style={{ background: 'var(--color-success)' }}></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl"
+             style={{ background: 'var(--highlight)' }}></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 py-10">
+        {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6 shadow-lg"
+               style={{ background: 'linear-gradient(135deg, #10b981, var(--highlight))' }}>
+            <Package size={40} className="text-white" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
             Receiver Portal
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            View and verify incoming packages
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+            Verify incoming packages with Bluetooth scanning and track your deliveries in real-time
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 p-6 mb-8 border border-gray-200 dark:border-gray-700">
-          <h2
-            className="text-xl font-semibold mb-4"
-            style={{ color: "var(--color-text)" }}
-          >
-            Bluetooth Verification
-          </h2>
-          <p className="muted-text mb-4">
-            Verify which packages are physically present using Bluetooth
-            scanning. Master will scan all 3 slaves (ESP32_Slave1, ESP32_Slave2,
-            ESP32_Slave3).
-          </p>
-          <div className="flex gap-4 mb-4">
-            <span className="status-badge-present font-medium">
-              ✓ {presentCount} Present
-            </span>
-            <span className="status-badge-missing font-medium">
-              ✗ {missingCount} Missing
-            </span>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+          <div className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+               style={{ background: 'var(--color-card)', border: '1px solid var(--divider)' }}>
+            <div className="absolute top-0 right-0 w-24 h-24 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Package size={80} />
+            </div>
+            <div className="relative">
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Total Packages</p>
+              <p className="text-4xl font-bold text-white">{myProducts.length}</p>
+            </div>
           </div>
-          {isScanning && (
-            <div
-              className="mb-4 p-3 card-rounded"
-              style={{
-                backgroundColor: "rgba(15,23,42,0.03)",
-                borderRadius: 8,
-              }}
-            >
-              <div
-                className="flex items-center gap-2"
-                style={{ color: "var(--color-primary)" }}
-              >
-                <div
-                  className="animate-spin rounded-full h-4 w-4 border-b-2"
-                  style={{ borderColor: "var(--color-primary)" }}
-                ></div>
-                <span className="text-sm font-medium">
-                  Scanning for slaves... Please wait (up to 30 seconds)
-                </span>
+
+          <div className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+               style={{ background: 'var(--color-card)', border: '1px solid var(--divider)' }}>
+            <div className="absolute top-0 right-0 w-24 h-24 opacity-10 group-hover:opacity-20 transition-opacity">
+              <CheckCircle size={80} />
+            </div>
+            <div className="relative">
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Present</p>
+              <p className="text-4xl font-bold" style={{ color: 'var(--color-success)' }}>{presentCount}</p>
+            </div>
+          </div>
+
+          <div className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+               style={{ background: 'var(--color-card)', border: '1px solid var(--divider)' }}>
+            <div className="absolute top-0 right-0 w-24 h-24 opacity-10 group-hover:opacity-20 transition-opacity">
+              <XCircle size={80} />
+            </div>
+            <div className="relative">
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Missing</p>
+              <p className="text-4xl font-bold" style={{ color: 'var(--color-error)' }}>{missingCount}</p>
+            </div>
+          </div>
+
+          <div className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+               style={{ background: 'var(--color-card)', border: '1px solid var(--divider)' }}>
+            <div className="absolute top-0 right-0 w-24 h-24 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Shield size={80} />
+            </div>
+            <div className="relative">
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Received</p>
+              <p className="text-4xl font-bold text-blue-400">{receivedCount}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* How It Works */}
+        <div className="rounded-2xl p-8 mb-10 border"
+             style={{ background: 'var(--color-panel)', borderColor: 'var(--divider)' }}>
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+            <ArrowRight className="text-green-400" size={28} />
+            How It Works
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              { step: '1', title: 'Await Delivery', desc: 'Wait for shipment notification from sender' },
+              { step: '2', title: 'Start Scanner', desc: 'Click "Verify Bluetooth" to scan for devices' },
+              { step: '3', title: 'Verify Items', desc: 'System detects which packages are present' },
+              { step: '4', title: 'Mark Received', desc: 'Confirm and mark packages as received' },
+            ].map((item, idx) => (
+              <div key={idx} className="text-center group">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-lg transition-transform group-hover:scale-110"
+                     style={{ background: 'var(--color-success)' }}>
+                  {item.step}
+                </div>
+                <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bluetooth Verification Section */}
+        <div className="rounded-2xl p-8 mb-10 border"
+             style={{ background: 'var(--color-panel)', borderColor: 'var(--divider)' }}>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div className="flex items-start gap-5">
+              <div className="flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center"
+                   style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}>
+                <Bluetooth size={32} className="text-white" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">Bluetooth Verification</h2>
+                <p className="max-w-xl" style={{ color: 'var(--text-secondary)' }}>
+                  Verify which packages are physically present using Bluetooth scanning. 
+                  The Master ESP32 will scan all slave devices to detect your packages in real-time.
+                </p>
+                <div className="flex flex-wrap gap-3 mt-4">
+                  <span className="status-badge-present font-medium flex items-center gap-1">
+                    <CheckCircle size={14} /> {presentCount} Present
+                  </span>
+                  <span className="status-badge-missing font-medium flex items-center gap-1">
+                    <XCircle size={14} /> {missingCount} Missing
+                  </span>
+                </div>
               </div>
             </div>
-          )}
-          <button
-            onClick={simulateBluetoothVerification}
-            disabled={isScanning}
-            className="accent-btn px-6 py-3 rounded-lg disabled:opacity-50 transition-colors font-medium flex items-center gap-2"
-          >
-            <Radio size={20} className={isScanning ? "animate-pulse" : ""} />
-            {isScanning ? "Scanning..." : "Verify Bluetooth"}
-          </button>
+
+            <div className="flex-shrink-0">
+              {isScanning && (
+                <div className="flex items-center gap-2 mb-3 px-4 py-2 rounded-lg"
+                     style={{ background: 'rgba(16, 185, 129, 0.1)' }}>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2"
+                       style={{ borderColor: 'var(--color-success)' }}></div>
+                  <span className="text-sm font-medium" style={{ color: 'var(--color-success)' }}>
+                    Scanning... Please wait (up to 30s)
+                  </span>
+                </div>
+              )}
+              <button
+                onClick={simulateBluetoothVerification}
+                disabled={isScanning}
+                className="w-full lg:w-auto px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+                style={{ 
+                  background: isScanning 
+                    ? 'var(--divider)' 
+                    : 'linear-gradient(135deg, #10b981, #059669)',
+                  boxShadow: isScanning ? 'none' : '0 8px 32px rgba(16, 185, 129, 0.3)'
+                }}
+              >
+                <Radio size={22} className={isScanning ? "animate-pulse" : ""} />
+                {isScanning ? "Scanning..." : "Verify Bluetooth"}
+              </button>
+            </div>
+          </div>
         </div>
 
+        {/* Product List */}
         <ProductList
           products={myProducts}
           onMarkReceived={handleMarkReceived}

@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "iot-logisticsweb"
+    "default": "iot-logistic-kit"
   },
   "targets": {},
   "etags": {}
