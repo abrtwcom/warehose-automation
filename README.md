@@ -1,6 +1,7 @@
 # IoT Logistics Tracking System
 
 A real-time warehouse package tracking system using ESP32 BLE beacons, React, and Firebase.
+
 https://iot-inventory-87709788-95492.firebaseapp.com/
 
 ## Features
@@ -12,15 +13,14 @@ https://iot-inventory-87709788-95492.firebaseapp.com/
 - **Responsive UI**: Modern, responsive interface built with React and Tailwind CSS
 
 ## Tech Stack
-<img width="1904" height="924" alt="Screenshot From 2026-01-19 19-56-42" src="https://github.com/user-attachments/assets/56a1f6e0-3cc1-493b-b498-130d4244f99a" />
 
 - **Frontend**: React 19 + Vite
 - **Styling**: Tailwind CSS
 - **Backend**: Firebase (Realtime Database, Authentication)
-- **Routing**: React Router DOM<img width="1904" height="924" alt="Screenshot From 2026-01-19 19-57-05" src="https://github.com/user-attachments/assets/7ac858f9-3d53-4c95-a3a7-feac0d6989ec" />
+- **Routing**: React Router DOM
 
 - **Icons**: Lucide React
-<img width="1920" height="1080" alt="Screenshot From 2026-01-20 19-52-12" src="https://github.com/user-attachments/assets/5254df73-f764-4c44-a488-517ce4ad4c1b" />
+
 
 ## Getting Started
 
@@ -98,11 +98,9 @@ The system works with ESP32 devices:
 
 See `ESP32_MASTER_TRIGGERED.ino` and `ESP32_TRIGGER_UPDATE.md` for implementation details.
 
-## Portals
-
 ### Home Page
 - Landing page with navigation to all portals
-
+<img width="1910" height="782" alt="Screenshot From 2026-01-21 14-26-57" src="https://github.com/user-attachments/assets/987286dd-f998-46e9-b412-5b1518e9a629" />
 ### Warehouse Tracker
 - Real-time display of scanner status
 - Live detection cards showing currently detected devices
@@ -112,11 +110,14 @@ See `ESP32_MASTER_TRIGGERED.ino` and `ESP32_TRIGGER_UPDATE.md` for implementatio
 - Create new shipments with package details
 - Assign ESP32 devices to packages
 - View all sent shipments
+  <img width="1904" height="924" alt="Screenshot From 2026-01-19 19-56-42" src="https://github.com/user-attachments/assets/56a1f6e0-3cc1-493b-b498-130d4244f99a" />
 
 ### Receiver Portal
 - View incoming products assigned to you
 - Bluetooth verification to check package presence
 - Mark packages as received
+
+<img width="1904" height="924" alt="Screenshot From 2026-01-19 19-57-05" src="https://github.com/user-attachments/assets/7ac858f9-3d53-4c95-a3a7-feac0d6989ec" />
 
 ## Firebase Database Rules
 
