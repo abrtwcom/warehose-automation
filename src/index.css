@@ -16,11 +16,9 @@
 
   --primary-start: #3b82f6;
   --primary-end: #6366f1;
-  --color-primary: linear-gradient(
-    135deg,
-    var(--primary-start),
-    var(--primary-end)
-  );
+  --color-primary: linear-gradient(135deg,
+      var(--primary-start),
+      var(--primary-end));
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -557,9 +555,7 @@ html {
 
 /* Transform utilities */
 .transform {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .scale-105 {
@@ -794,6 +790,7 @@ button {
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     opacity: 1;
@@ -829,6 +826,7 @@ button {
 }
 
 @keyframes glow {
+
   0%,
   100% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
@@ -855,16 +853,14 @@ button {
 
 /* ── Premium Step Cards ────────────────────────────── */
 .steps-grid-4 {
-  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .step-card {
   position: relative;
-  background: linear-gradient(
-    168deg,
-    rgba(30, 41, 59, 0.85) 0%,
-    rgba(15, 23, 42, 0.95) 100%
-  );
+  background: linear-gradient(168deg,
+      rgba(30, 41, 59, 0.85) 0%,
+      rgba(15, 23, 42, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1.25rem;
   padding: 1.75rem 1.25rem 1.5rem;
@@ -881,11 +877,9 @@ button {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    circle at 50% 0%,
-    rgba(59, 130, 246, 0.08) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(circle at 50% 0%,
+      rgba(59, 130, 246, 0.08) 0%,
+      transparent 60%);
   pointer-events: none;
 }
 
@@ -930,11 +924,9 @@ button {
   left: calc(50% + 1.25rem);
   width: calc(100% - 0.5rem);
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(59, 130, 246, 0.4),
-    rgba(99, 102, 241, 0.15)
-  );
+  background: linear-gradient(90deg,
+      rgba(59, 130, 246, 0.4),
+      rgba(99, 102, 241, 0.15));
   transform: translateY(-50%);
   z-index: 1;
 }
@@ -963,17 +955,17 @@ button {
 
 /* ── Step text ──────────────────────────────────────── */
 .step-card h4 {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.01em;
 }
 
 .step-card p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .how-it-works-card {
@@ -1193,16 +1185,12 @@ button {
   min-height: 100vh;
   padding: 2rem;
   background:
-    radial-gradient(
-      ellipse at 20% 20%,
+    radial-gradient(ellipse at 20% 20%,
       rgba(59, 130, 246, 0.06) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 80% 80%,
+      transparent 50%),
+    radial-gradient(ellipse at 80% 80%,
       rgba(139, 92, 246, 0.06) 0%,
-      transparent 50%
-    ),
+      transparent 50%),
     var(--color-bg);
 }
 
@@ -1788,6 +1776,10 @@ button {
     width: 3rem;
     height: 3rem;
   }
+
+  .steps-grid-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
 /* Portal pages responsive styles */
@@ -1869,6 +1861,7 @@ button {
 }
 
 @media (max-width: 640px) {
+
   .portal-stats-grid,
   .receiver-stats-grid,
   .warehouse-stats-grid {

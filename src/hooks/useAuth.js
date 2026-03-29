@@ -28,7 +28,7 @@ export const useAuth = () => {
             uid: firebaseUser.uid,
             email: firebaseUser.email,
             ...userData,
-            role: forcedRole,
+            role: forcedRole || "receiver", // Ensure a default role
           });
         } catch (error) {
           console.error("Error fetching user data:", error);
