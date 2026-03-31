@@ -23,7 +23,11 @@ export const useRealtimeData = (path, options = {}) => {
   } = options;
 
   useEffect(() => {
-    if (!enabled) {
+    if (!enabled || !database) {
+      if (!database) {
+        setLoading(false);
+        setError(new Error("Firebase Database is not initialized."));
+      }
       return;
     }
 

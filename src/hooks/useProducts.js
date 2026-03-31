@@ -14,6 +14,9 @@ import { database } from "../firebase/config";
 // Not a true React hook (no state/effects) — kept as `use` prefix for existing usage.
 export const useProducts = () => {
   const createProduct = async (productData) => {
+    if (!database) {
+      throw new Error("Firebase Database is not initialized.");
+    }
     const productsRef = ref(database, "products");
     const newProductRef = push(productsRef);
 
@@ -28,6 +31,9 @@ export const useProducts = () => {
   };
 
   const updateProduct = async (productId, updates) => {
+    if (!database) {
+      throw new Error("Firebase Database is not initialized.");
+    }
     const productRef = ref(database, `products/${productId}`);
     await update(productRef, {
       ...updates,
@@ -36,11 +42,17 @@ export const useProducts = () => {
   };
 
   const deleteProduct = async (productId) => {
+    if (!database) {
+      throw new Error("Firebase Database is not initialized.");
+    }
     const productRef = ref(database, `products/${productId}`);
     await remove(productRef);
   };
 
   const getProductsByReceiver = async (receiverEmail) => {
+    if (!database) {
+      return [];
+    }
     const productsRef = ref(database, "products");
     const q = query(
       productsRef,
@@ -59,6 +71,9 @@ export const useProducts = () => {
   };
 
   const getProductsBySender = async (senderEmail) => {
+    if (!database) {
+      return [];
+    }
     const productsRef = ref(database, "products");
     const q = query(
       productsRef,

@@ -15,6 +15,11 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!auth || !database) {
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         try {
@@ -50,11 +55,14 @@ export const useAuth = () => {
   }, []);
 
   const login = async (email, password) => {
+    if (!auth) throw new Error("Firebase Auth is not initialized.");
     const credential = await signInWithEmailAndPassword(auth, email, password);
     return credential.user;
   };
 
   const signup = async (email, password, { fullName, role }) => {
+    if (!auth || !database)
+      throw new Error("Firebase Auth or Database is not initialized.");
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     const uid = cred.user.uid;
     const userRef = ref(database, `users/${uid}`);
@@ -69,6 +77,8 @@ export const useAuth = () => {
   };
 
   const loginWithGoogle = async (role = "receiver") => {
+    if (!auth || !database)
+      throw new Error("Firebase Auth or Database is not initialized.");
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const { user: gUser } = result;
@@ -88,6 +98,7 @@ export const useAuth = () => {
   };
 
   const logout = async () => {
+    if (!auth) return;
     await signOut(auth);
   };
 
