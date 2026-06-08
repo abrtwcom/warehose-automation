@@ -7,16 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
 *.local
 
-# Editor directories and files
-.vscode/*
+# Editor & IDE
+.vscode/
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
@@ -33,9 +36,12 @@ dist-ssr
 .firebasecache
 .firebaserc
 
-# Build outputs
-# (*.local already covered above)
-
 # OS files
+.DS_Store
 Thumbs.db
 
+# Firmware
+*.ino
+
+# Lock files (optional - remove if you want to commit package-lock.json)
+package-lock.json
