@@ -1,12 +1,5 @@
 # 🏭 IoT Warehouse Automation System
 
-[Live Demo](https://iot-inventory-87709788-95492.web.app/)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-19.1-61dafb?logo=react)](https://reactjs.org/)
-[![Firebase](https://img.shields.io/badge/Firebase-12.8-ffca28?logo=firebase)](https://firebase.google.com/)
-[![Vite](https://img.shields.io/badge/Vite-7.1-646cff?logo=vite)](https://vitejs.dev/)
-
 A real-time warehouse package tracking system powered by ESP32 BLE beacons, React, and Firebase. Track packages in real-time, verify deliveries with Bluetooth scanning, and manage your logistics operations through an intuitive multi-portal interface.
 
 📖 **[Read the full blog post](https://medium.com/@amitbartwal008/warehouse-automation-how-iot-real-time-tracking-are-transforming-logistics-669beeb8fb8a)** to learn more about the technology behind this project.
@@ -55,13 +48,6 @@ A real-time warehouse package tracking system powered by ESP32 BLE beacons, Reac
    npm install
    ```
 
-3. **Configure Firebase**
-
-   Copy the example environment file and add your Firebase credentials:
-
-   ```bash
-   cp .env.example .env
-   ```
 
    Edit `.env` and fill in your Firebase configuration:
 
@@ -135,33 +121,6 @@ See [`ESP32_MASTER_TRIGGERED.ino`](ESP32_MASTER_TRIGGERED.ino) and [`ESP32_TRIGG
 - **Mark as received**: Confirm delivery and update package status
 - **Real-time status**: Automatic updates as packages move through the warehouse
 
-## 🔐 Firebase Database Structure
-
-```
-firebase-database/
-├── products/
-│   └── {productId}/
-│       ├── name: "Package Name"
-│       ├── sender_email: "sender@example.com"
-│       ├── receiver_email: "receiver@example.com"
-│       ├── device_name: "ESP32_SLAVE_01"
-│       ├── status: "present" | "missing" | "received"
-│       ├── created_date: "2024-01-20T10:00:00Z"
-│       └── updated_date: "2024-01-20T15:30:00Z"
-├── warehouse/
-│   ├── scanner/
-│   │   ├── status: "online" | "scanning" | "offline"
-│   │   └── last_seen: "2024-01-20T15:30:00Z"
-│   ├── current_status/
-│   │   └── {deviceName}/
-│   │       ├── present: true | false
-│   │       └── last_seen: timestamp
-│   └── detections/
-│       └── {detectionId}/
-│           ├── device_name: "ESP32_SLAVE_01"
-│           ├── rssi: -45
-│           └── timestamp: 1234567890
-```
 
 ### Security Rules
 
